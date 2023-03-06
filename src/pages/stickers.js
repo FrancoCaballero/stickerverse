@@ -11,7 +11,7 @@ export default function stickers () {
   const findStickers = useCallback(async () => {
     const userId = userContext?.user?.id
     const response = await findStickersByUserId({ userId })
-    console.log(response)
+
     setStickers(response)
   }, [userContext])
 
@@ -32,7 +32,7 @@ export default function stickers () {
   return (
     <Container>
       <Heading as='h1' mb={5}>My Stickers</Heading>
-      <Flex gap={10} border='1px' p={10}>
+      <Flex gap={10} border='1px' p={10} wrap='wrap'>
         {stickers &&
           stickers.map(({ public_id: publicId, name }) => (
             <CldImage

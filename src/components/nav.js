@@ -17,8 +17,6 @@ export default function Nav () {
   const router = useRouter()
   const { userContext, setUserContext } = useContext(UserContext)
 
-  console.log(userContext)
-
   const signOutSession = async () => {
     await signOut()
     setUserContext(null)

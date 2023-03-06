@@ -4,7 +4,6 @@ import React from 'react'
 
 export function UploadImage ({ handleUploadImage }) {
   const handleUpload = (result) => {
-    console.log(result)
     const { public_id: publicId, original_filename: name, height: originalHeight, width: originalWidth } = result.info
     handleUploadImage({ publicId, name, originalHeight, originalWidth })
   }

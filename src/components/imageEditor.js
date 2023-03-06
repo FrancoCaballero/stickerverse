@@ -29,7 +29,7 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
   useEffect(() => {
     if (loadingImage) {
       const modifiedImage = document.querySelector('#modifiedImage')
-      console.log(modifiedImage)
+
       if (intervalId !== null) {
         clearInterval(intervalId)
       }
@@ -95,7 +95,6 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
     const { id: userId } = userContext.user
 
     await addSticker({ userId, publicId, name, height, width })
-    console.log('sticker saved')
     router.push('/stickers')
   }
 

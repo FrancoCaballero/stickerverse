@@ -9,7 +9,6 @@ cloudinary.config({
 })
 
 export default async function handler (req, res) {
-  console.log(req)
   const { url } = req.query
   const response = await cloudinary.uploader.upload(url)
 
