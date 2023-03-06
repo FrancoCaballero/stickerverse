@@ -21,6 +21,21 @@ export default function stickers () {
     }
   }, [findStickers, userContext])
 
+  const handleClick = ({ event, width, name }) => {
+    const url = event.target.src.replace('w_100', `w_${width}`)
+
+    fetch(url)
+      .then(res => res.blob())
+      .then(blob => {
+        const urlBlob = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = urlBlob
+        a.download = name
+        a.click()
+        URL.revokeObjectURL(urlBlob)
+      })
+  }
+
   if (stickers?.length === 0) {
     return (
       <Container>
@@ -34,13 +49,15 @@ export default function stickers () {
       <Heading as='h1' mb={5}>My Stickers</Heading>
       <Flex gap={10} border='1px' p={10} wrap='wrap'>
         {stickers &&
-          stickers.map(({ public_id: publicId, name }) => (
+          stickers.map(({ public_id: publicId, name, width }) => (
             <CldImage
+              style={{ cursor: 'pointer' }}
               key={publicId}
               src={publicId}
               alt={name}
               width={100}
               height={100}
+              onClick={(event) => handleClick({ event, width, name })}
             />
           ))}
       </Flex>
