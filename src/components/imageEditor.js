@@ -44,7 +44,7 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
       }, 500)
       setIntervalId(newIntervalId)
     }
-  }, [loadingImage])
+  }, [loadingImage, intervalId])
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target

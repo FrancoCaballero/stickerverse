@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Heading } from '@chakra-ui/react'
+import { Button, Flex, Heading } from '@chakra-ui/react'
 import { CldUploadWidget } from 'next-cloudinary'
 import React from 'react'
 

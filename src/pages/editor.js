@@ -1,7 +1,7 @@
 import { ImageEditor } from '@/components/imageEditor'
 import { UploadImage } from '@/components/uploadImage'
 import { supabase } from '@/db/supabase'
-import { Flex, Heading } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import { useState } from 'react'
 
 export default function editor () {
