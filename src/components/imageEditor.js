@@ -17,14 +17,16 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
     width: originalWidth,
     height: originalHeight,
     faceDetection: true,
-    text: '',
+    topText: '',
+    bottomText: '',
     pixelateFace: false,
     overlayX: 10,
     overlayY: 10,
-    overlayWidth: 300
+    overlayWidth: 300,
+    fontSize: 90
   })
 
-  const { width, height, faceDetection, text, pixelateFace, overlayX, overlayY, overlayWidth } = form
+  const { width, height, faceDetection, topText, bottomText, fontSize, pixelateFace, overlayX, overlayY, overlayWidth } = form
 
   useEffect(() => {
     if (loadingImage) {
@@ -100,21 +102,47 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
 
   let overlay = []
 
-  if (text) {
+  if (topText) {
     overlay = [{
       text: {
         color: 'white',
         fontFamily: 'Source Sans Pro',
-        fontSize: 60,
+        fontSize,
         fontWeight: 'bold',
-        text
+        text: topText,
+        stroke: true,
+        border: '20px_solid_black'
       },
       position: {
-        x: 10,
-        y: 10,
+        x: 0,
+        y: 0,
         gravity: 'north'
       }
     }]
+  }
+
+  if (bottomText) {
+    const newText = {
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize,
+        fontWeight: 'bold',
+        text: bottomText,
+        stroke: true,
+        border: '20px_solid_black'
+      },
+      position: {
+        x: 0,
+        y: 0,
+        gravity: 'south'
+      }
+    }
+    if (overlay?.length === 0) {
+      overlay = [newText]
+    } else {
+      overlay.push(newText)
+    }
   }
 
   if (overlayId) {
@@ -184,12 +212,18 @@ export function ImageEditor ({ name, publicId, originalHeight, originalWidth }) 
                 </AccordionButton>
               </h2>
               <AccordionPanel>
-                <Stack direction={['column', 'row']}>
-                  <FormControl>
-                    <FormLabel>Text</FormLabel>
-                    <Input name='text' value={text} type='text' onChange={handleChange} />
-                  </FormControl>
-                </Stack>
+                <FormControl>
+                  <FormLabel>Top Text</FormLabel>
+                  <Input name='topText' value={topText} type='text' onChange={handleChange} />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Bottom Text</FormLabel>
+                  <Input name='bottomText' value={bottomText} type='text' onChange={handleChange} />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Font Size</FormLabel>
+                  <Input name='fontSize' value={fontSize} type='number' onChange={handleChange} />
+                </FormControl>
               </AccordionPanel>
             </AccordionItem>
 
