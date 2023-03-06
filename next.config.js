@@ -4,7 +4,6 @@ const nextConfig = {
   experimental: {
     esmExternals: false
   },
-  webpack5: true,
   webpack: config => {
     config.resolve.fallback = {
       fs: false
